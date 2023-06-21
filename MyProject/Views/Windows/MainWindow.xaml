@@ -6,11 +6,24 @@
         xmlns:vm="clr-namespace:MyProject.ViewModels"
         xmlns:local="clr-namespace:MyProject"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="1080" Width="1920">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Create" Content="Create" Width="150" 
+                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Load" Content="Load" Width="150" 
+                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin ="0 250 0 0"/>
     </Grid>
 </Window>
