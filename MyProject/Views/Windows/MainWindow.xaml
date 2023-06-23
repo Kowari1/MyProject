@@ -22,8 +22,10 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="1" Grid.Row="1" x:Name="Create" Content="Create" Width="150" 
-                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Command="{Binding ShowCreateTestsWindow}"/>
         <Button Grid.Column="1" Grid.Row="1" x:Name="Load" Content="Load" Width="150" 
-                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin ="0 250 0 0"/>
+                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin ="0 250 0 0"
+                Command="{Binding ShowTestsWindow}"/>
     </Grid>
 </Window>
