@@ -3,10 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:MyProject.ViewModels"
         xmlns:local="clr-namespace:MyProject.Views.Windows"
         mc:Ignorable="d"
         Title="CreateTestWindow" Height="1080" Width="1920">
+    <Window.DataContext>
+        <vm:CreateTestWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="inerphaseList" Grid.Column="1" DataContext ="{Binding inerphaseItem}"  ItemsSource="{Binding inerphaseItem}">
+        </ListBox>
+        <Button x:Name="Create" Content="Добавить элемемент" Width="150" 
+                Height="50" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
