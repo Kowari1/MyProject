@@ -8,7 +8,7 @@ namespace MyProject.Infrastructure.Commands
         private readonly Action<object> execute;
         private readonly Func<object, bool> canExecut;
 
-        public LambdaCommand(Action<object> Execute, Func<object, bool> CanExecute = null) 
+        public LambdaCommand(Action<object> Execute, Func<object, bool> CanExecute = null)
         {
             execute = Execute ?? throw new ArgumentException(nameof(Execute));
             canExecut = CanExecute;
@@ -16,6 +16,10 @@ namespace MyProject.Infrastructure.Commands
 
         public override bool CanExecute(object parameter) => canExecut?.Invoke(parameter) ?? true;
 
-        public override void Execute(object parameter) => execute(parameter);
+        public override void Execute(object parameter)
+            {
+            if(!CanExecute(parameter)) return;
+            execute(parameter);
+            }
     }
 }

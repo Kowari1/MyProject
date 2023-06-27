@@ -20,17 +20,17 @@ namespace MyProject.ViewModels
         #region Create Commands
 
         #region Buttons Commands
-        public ICommand ShowTestsWindow { get; }
+        public ICommand ShowTestWindow { get; }
 
-        private void OnShowTestsWindowExecuted(object parameters)
+        private void OnShowTestWindowExecuted(object parameters)
         {
-            LoadTestsWindow window = new LoadTestsWindow();
+            LoadTestWindow window = new LoadTestWindow();
             window.Show();
         }
 
-        private bool CanShowTestsWindowExecuted(object parameter) => true;
+        private bool CanShowTestWindowExecuted(object parameter) => true;
 
-        public ICommand ShowCreateTestsWindow { get; }
+        public ICommand ShowCreateTestWindow { get; }
 
         private void OnShowCreateTestsWindowExecuted(object parameters)
         {
@@ -46,9 +46,9 @@ namespace MyProject.ViewModels
         public MainWindowViewModel()
         {
             #region Initialization Commands
-            ShowTestsWindow = new LambdaCommand(OnShowTestsWindowExecuted, CanShowTestsWindowExecuted);
+            ShowTestWindow = new LambdaCommand(OnShowTestWindowExecuted, CanShowTestWindowExecuted);
 
-            ShowCreateTestsWindow = new LambdaCommand(OnShowCreateTestsWindowExecuted, CanShowCreateTestsWindowExecuted);
+            ShowCreateTestWindow = new LambdaCommand(OnShowCreateTestsWindowExecuted, CanShowCreateTestsWindowExecuted);
             #endregion
         }
     }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace MyProject.Views.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для LoadTestsWindow.xaml
+    /// Логика взаимодействия для LoadTestWindow.xaml
     /// </summary>
-    public partial class LoadTestsWindow : Window
+    public partial class LoadTestWindow : Window
     {
-        public LoadTestsWindow()
+        public LoadTestWindow()
         {
             InitializeComponent();
         }
