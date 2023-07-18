@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:MyProject.ViewModels"
         xmlns:local="clr-namespace:MyProject"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="1080" Width="1920">
+        Title="Create Test" Height="1080" Width="1920">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>

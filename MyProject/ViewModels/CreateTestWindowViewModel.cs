@@ -6,10 +6,9 @@ namespace MyProject.ViewModels
 {
     internal class CreateTestWindowViewModel : ViewModel
     {
-        public ObservableCollection<object> inerphaseItem = new ObservableCollection<object>()
+        public ObservableCollection<string> inerphaseItemems = new ObservableCollection<string>()
         {
-            new TextBlock(),
-            new TextBlock()
+            "Test"
         };
 
         public CreateTestWindowViewModel()

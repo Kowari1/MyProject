@@ -16,9 +16,9 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="inerphaseList" Grid.Column="1" DataContext ="{Binding inerphaseItem}"  ItemsSource="{Binding inerphaseItem}">
+        <ListBox x:Name="inerphaseList" Grid.Column="1"   ItemsSource="{Binding inerphaseItemems}">
         </ListBox>
-        <Button x:Name="Create" Content="Добавить элемемент" Width="150" 
+        <Button x:Name="Create" Content="Добавить элемент" Width="150" 
                 Height="50" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
