@@ -1,19 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MyProject.Models
 {
     [Serializable]
-    public class RadioButtonItem : IItem
+    public class TextItem : IItem
     {
-        private string text;
-        public string Text
-        {
-            get => text;
-            set => text = value;
-        }
-
-        private bool correctAnswer = false;
-        public bool CorrectAnswer
+        private string correctAnswer;
+        public string CorrectAnswer
         {
             get => correctAnswer;
             set => correctAnswer = value;
@@ -21,7 +18,7 @@ namespace MyProject.Models
 
         public override bool Equals(object obj)
         {
-            if (obj is RadioButtonItem objectType)
+            if (obj is TextItem objectType)
             {
                 return this.CorrectAnswer == objectType.CorrectAnswer;
             }

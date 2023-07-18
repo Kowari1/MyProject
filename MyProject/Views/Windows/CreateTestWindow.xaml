@@ -11,14 +11,77 @@
         <vm:CreateTestWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <ListBox x:Name="inerphaseList" Grid.Column="1"   ItemsSource="{Binding inerphaseItemems}">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition></ColumnDefinition>
+        <ColumnDefinition></ColumnDefinition>
+        <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+        <TextBlock Text="{Binding TestName}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" MinWidth="100"/>
+        <ListBox BorderThickness="0" Margin="30" ScrollViewer.CanContentScroll="True" x:Name="Questions" ItemsSource="{Binding Questions}"
+                     SelectedItem="{Binding SelectedQuestion}" VerticalAlignment="Stretch" Height="1080">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="10,10,10,10" Margin="30,0,0,30" x:Name="bd" Background="White" BorderBrush="White" SnapsToDevicePixels="true" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="700">
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="../../Resources/DataTemplates/ListItemDataTemplates.xaml"/>
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
+                            </StackPanel.Resources>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding QuestionName, Mode=TwoWay}" MinWidth="500"/>
+                                <Button x:Name="RemoveQuestion" Content="RemoveQuestion" Width="50" 
+                Height="20" HorizontalAlignment="Right"
+                Command ="{Binding DataContext.RemoveQuestion, RelativeSource={RelativeSource AncestorType = ListBox}}"
+                                    CommandParameter="{Binding DataContext.SelectedQuestion, RelativeSource={RelativeSource AncestorType = ListBox}}"/>
+                            </StackPanel>
+                            <ListBox BorderThickness="0" ItemsSource="{Binding Items}"
+                                     SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorType = ListBox}}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="IsSelected" Value="True"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                            <Button x:Name="AddItem" Content="AddItem" Width="50"
+                Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"
+                Command ="{Binding DataContext.AddItem, RelativeSource={RelativeSource AncestorType = ListBox}}"
+                                    CommandParameter="{Binding DataContext.SelectedQuestion, RelativeSource={RelativeSource AncestorType = ListBox}}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="Create" Content="Добавить элемент" Width="150" 
-                Height="50" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Center"/>
+        <ComboBox Width="200" HorizontalAlignment="Right" Text="Тип вопроса">
+            <Button  x:Name="Create" Content="Один из списка" Width="50" 
+                Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"
+                Command ="{Binding CreateQuestionCheckBoxItems}"/>
+            <Button x:Name="CreateText" Content="Множество из списка" Width="50" 
+                Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"
+                Command ="{Binding CreateQuestionRadioButtomItems}"/>
+            <Button x:Name="CreateCheck" Content="Текс" Width="50" 
+                Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10"
+                Command ="{Binding CreateQuestionTextItem}"/>
+        </ComboBox>
+    </StackPanel>
+    <Button Grid.Column="1" x:Name="CreateTest" Content="CreateTest" Width="50"
+                Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20"
+                Command ="{Binding CreateTest}"/>
     </Grid>
 </Window>

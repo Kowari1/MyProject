@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Resources\DataTemplates\ListItemDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\CreateTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,9 @@
     <Compile Include="Models\IItem.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\RadioButtonItem.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\Tests.cs" />
+    <Compile Include="Models\TextItem.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\CreateTestWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
