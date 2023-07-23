@@ -56,9 +56,7 @@ namespace MyProject.ViewModels
                 return createQuestionCheckBoxItems ??
                   (createQuestionCheckBoxItems = new LambdaCommand(obj =>
                   {
-                      var questionCheckBoxItem = new Question() { QuestionName = "" + Questions.Count };
-                      questionCheckBoxItem.Items.Add(new CheckBoxItem());
-                      Questions.Add(questionCheckBoxItem);
+                      AddAnyQuestion(new CheckBoxItem());
                   }));
             }
         }
@@ -71,9 +69,7 @@ namespace MyProject.ViewModels
                 return createQuestionRadioButtomItems ??
                   (createQuestionRadioButtomItems = new LambdaCommand(obj =>
                   {
-                      var questionRadioButtomItems = new Question() { QuestionName = "" + Questions.Count };
-                      questionRadioButtomItems.Items.Add(new RadioButtonItem());
-                      Questions.Add(questionRadioButtomItems);
+                      AddAnyQuestion(new RadioButtonItem());
                   }));
             }
         }
@@ -86,9 +82,7 @@ namespace MyProject.ViewModels
                 return createQuestionTextItem ??
                   (createQuestionTextItem = new LambdaCommand(obj =>
                   {
-                      var questionTextItem = new Question() { QuestionName = "" + Questions.Count };
-                      questionTextItem.Items.Add(new TextItem());
-                      Questions.Add(questionTextItem);
+                      AddAnyQuestion(new TextItem());
                   }));
             }
         }
@@ -156,6 +150,14 @@ namespace MyProject.ViewModels
                       }
                   }));
             }
+        }
+
+        private void AddAnyQuestion<T>(T item)
+            where T : IItem, new()
+        {
+            var questionItem = new Question() { QuestionName = "" + Questions.Count };
+            questionItem.Items.Add(new T());
+            Questions.Add(questionItem);
         }
 
         public CreateTestWindowViewModel()
