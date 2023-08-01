@@ -1,8 +1,10 @@
 ﻿
+using System;
 using System.Collections.ObjectModel;
 
 namespace MyProject.Models
 {
+    [Serializable]
     public class Test
     {
         public Test()
@@ -11,7 +13,7 @@ namespace MyProject.Models
         public Test(string name, ObservableCollection<Question> questions)
         {
             Name = name;
-            PathFile = $"D:\\TestProject\\IColectionTest\\test repository\\{name}.tdt";
+            PathFile = $"D:\\MainProject\\MyProject\\test repository\\{name}.tdt";
             Questions = questions;
         }
 

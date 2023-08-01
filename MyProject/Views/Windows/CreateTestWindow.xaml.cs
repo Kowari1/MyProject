@@ -1,15 +1,16 @@
-﻿using System.Windows;
+﻿using MyProject.Models;
+using MyProject.Services;
+using MyProject.ViewModels;
+using System.Windows;
 
 namespace MyProject.Views.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для CreateTestWindow.xaml
-    /// </summary>
-    public partial class CreateTestWindow : Window
+    public partial class CreateTestWindow : Window 
     {
-        public CreateTestWindow()
+        public CreateTestWindow(Test test, bool editTest)
         {
             InitializeComponent();
+            DataContext = new Create_LoadWindowViewModel(new BinaryFormatterService(), test, editTest);
         }
     }
 }

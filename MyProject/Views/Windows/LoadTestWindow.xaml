@@ -3,10 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm ="clr-namespace:MyProject.ViewModels"
         xmlns:local="clr-namespace:MyProject.Views.Windows"
         mc:Ignorable="d"
-        Title="LoadTestWindow" Height="450" Width="800">
+        d:DataContext="{d:DesignInstance Type=vm:LoadTestViewModel, IsDesignTimeCreatable=False}"
+        Title="LoadTest" Height="1080" Width="1920">
+    <Window.Resources>
+
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <Button Content="Finish" Command="{Binding Finis}" Width="150" Margin="10"/>
+            <TextBlock Background="White" Text="{Binding test.Name}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" MinWidth="100"/>
+            <ListBox Background="#202020" BorderThickness="0" Margin="30" ScrollViewer.CanContentScroll="True" x:Name="Questions" ItemsSource="{Binding ReferenseTest}"
+                     SelectedItem="{Binding SelectedQuestion}" VerticalAlignment="Stretch" Height="1080">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10,10,10,10" Margin="30,0,0,30" x:Name="bd" Background="White" BorderBrush="White" SnapsToDevicePixels="true" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="700">
+                            <StackPanel>
+                                <StackPanel.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="../../Resources/DataTemplates/ListBoxDataTemplatePlayTest.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </StackPanel.Resources>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="Black" Text="{Binding QuestionName}" MinWidth="500"/>
+                                </StackPanel>
+                                <ListBox BorderThickness="0" ItemsSource="{Binding Items}"
+                                     SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorType = ListBox}}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Window>

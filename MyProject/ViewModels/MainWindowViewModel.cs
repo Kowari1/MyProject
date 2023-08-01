@@ -1,45 +1,107 @@
 ﻿using MyProject.Infrastructure.Commands;
+using MyProject.Models;
+using MyProject.Services;
 using MyProject.ViewModels.Base;
 using MyProject.Views.Windows;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
 
 namespace MyProject.ViewModels
 {
-    internal class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel
     {
-        #region Create Commands
+        IFileService fileService;
 
-        #region Buttons Commands
-        public ICommand ShowTestWindow { get; }
+        public ObservableCollection<Test> TestsCollection { get; set; }
 
-        private void OnShowTestWindowExecuted(object parameters)
+        private Test selectedTest;
+        public Test SelectedTest
         {
-            LoadTestWindow window = new LoadTestWindow();
-            window.Show();
+            get => selectedTest;
+            set
+            {
+                Set(ref selectedTest, value);
+            }
         }
 
-        private bool CanShowTestWindowExecuted(object parameter) => true;
-
-        public ICommand ShowCreateTestWindow { get; }
-
-        private void OnShowCreateTestsWindowExecuted(object parameters)
+        private LambdaCommand createTest;
+        public LambdaCommand CreateTest
         {
-            CreateTestWindow window = new CreateTestWindow();
-            window.Show();
+            get
+            {
+                return createTest ??
+                  (createTest = new LambdaCommand(obj =>
+                  {
+                      OpenWindow(new CreateTestWindow(new Test(), false));
+                  }));
+            }
         }
 
-        private bool CanShowCreateTestsWindowExecuted(object parameter) => true;
-        #endregion
-
-        #endregion
-
-        public MainWindowViewModel()
+        private LambdaCommand remove;
+        public LambdaCommand Remove
         {
-            #region Initialization Commands
-            ShowTestWindow = new LambdaCommand(OnShowTestWindowExecuted, CanShowTestWindowExecuted);
+            get
+            {
+                return remove ??
+                  (remove = new LambdaCommand(obj =>
+                  {
+                      fileService.DeleteFile(SelectedTest);
+                  }));
+            }
+        }
 
-            ShowCreateTestWindow = new LambdaCommand(OnShowCreateTestsWindowExecuted, CanShowCreateTestsWindowExecuted);
-            #endregion
+        private LambdaCommand edit;
+        public LambdaCommand Edit
+        {
+            get
+            {
+                return edit ??
+                  (edit = new LambdaCommand(obj =>
+                  {
+                      OpenWindow(new CreateTestWindow(SelectedTest, true));
+                  }));
+            }
+        }
+
+        private LambdaCommand play;
+        public LambdaCommand Play
+        {
+            get
+            {
+                return play ??
+                  (play = new LambdaCommand(obj =>
+                  {
+                      OpenWindow(new LoadTestWindow(SelectedTest));
+                  }));
+            }
+        }
+
+        #region METHODS
+        private void OpenWindow<T>(T window)
+            where T : Window
+        {
+            SetCenterPositionAndOpen(window);
+        }
+
+        private void SetCenterPositionAndOpen(Window window)
+        {
+            window.Owner = Application.Current.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.ShowDialog();
+        }
+        #endregion
+
+        public MainWindowViewModel(IFileService fileService)
+        {
+            this.fileService = fileService;
+            var filesPath = Directory.GetFiles("D:\\MainProject\\MyProject\\test repository\\", "*.tdt");
+            foreach (var file in filesPath)
+            {
+                Tests.tests.Add(fileService.Open(file));
+            }
+
+            TestsCollection = Tests.tests;
         }
     }
 }

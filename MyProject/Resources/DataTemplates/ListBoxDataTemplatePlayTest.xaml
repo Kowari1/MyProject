@@ -1,4 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:models ="clr-namespace:MyProject.Models">
+    <DataTemplate DataType="{x:Type models:CheckBoxItem}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <CheckBox IsChecked="{Binding CorrectAnswer, Mode=TwoWay}" Content="{Binding Text}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type models:TextItem}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBox Foreground="Black" Style="{DynamicResource TextBoxStyle1}" Text="{Binding CorrectAnswer, Mode=TwoWay}" MinWidth="500"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type models:RadioButtonItem}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <RadioButton Command="{Binding DataContext.RadioButtonChekced, RelativeSource={RelativeSource AncestorType = Window}}"
+                             GroupName="{Binding DataContext.QuestionName, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                         Content="{Binding Text}"/>
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

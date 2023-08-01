@@ -7,25 +7,39 @@
         xmlns:local="clr-namespace:MyProject"
         mc:Ignorable="d"
         Title="Create Test" Height="1080" Width="1920">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Button Grid.Column="1" Grid.Row="1" x:Name="Create" Content="Create" Width="150" 
-                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                Command="{Binding ShowCreateTestWindow}"/>
-        <Button Grid.Column="1" Grid.Row="1" x:Name="Load" Content="Load" Width="150" 
-                Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Margin ="0 250 0 0"
-                Command="{Binding ShowTestWindow}"/>
+        <Button Grid.Row="0" x:Name="Create" Content="Create Test" VerticalAlignment="Top" Width="150" Margin="30" 
+                Height="50" HorizontalAlignment="Center"
+                Command="{Binding CreateTest}"/>
+
+        <ListBox Background="#202020" BorderThickness="0" Grid.Row="1" ItemsSource="{Binding TestsCollection}" SelectedItem="{Binding SelectedTest}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Background="White" Margin="5">
+                        <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+                            <Button Content="Play" Margin="3,0"
+                                    Command ="{Binding DataContext.Play, RelativeSource={RelativeSource AncestorType = ListBox}}"
+                                    CommandParameter="{Binding DataContext.SelectedTest, RelativeSource={RelativeSource AncestorType = ListBox}}"/>
+                            <Button Content="Remove" Margin="3,0"
+                                    Command ="{Binding DataContext.Remove, RelativeSource={RelativeSource AncestorType = ListBox}}"
+                                    CommandParameter="{Binding DataContext.SelectedTest, RelativeSource={RelativeSource AncestorType = ListBox}}"/>
+                            <Button Content="Edit" Margin="3,0"
+                                    Command ="{Binding DataContext.Edit, RelativeSource={RelativeSource AncestorType = ListBox}}"
+                                    CommandParameter="{Binding DataContext.SelectedTest, RelativeSource={RelativeSource AncestorType = ListBox}}"/>
+                        </UniformGrid>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </Window>
