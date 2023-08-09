@@ -2,9 +2,8 @@
 using System;
 
 namespace MyProject.Models
-{
-    [Serializable]
-    public class IItem
+{   
+    public interface IItem
     {
     }
 }

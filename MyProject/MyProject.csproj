@@ -106,6 +106,7 @@
     <Compile Include="Models\TextItem.cs" />
     <Compile Include="Services\BinaryFormatterService.cs" />
     <Compile Include="Services\IFileService.cs" />
+    <Compile Include="Services\IWindowService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\CreateTestWindowViewModel.cs" />
     <Compile Include="ViewModels\LoadTestViewModel.cs" />

@@ -12,6 +12,7 @@ namespace MyProject.ViewModels
     public class MainWindowViewModel : ViewModel
     {
         IFileService fileService;
+        IWindowService windowService = new WindowSerwice();
 
         public ObservableCollection<Test> TestsCollection { get; set; }
 
