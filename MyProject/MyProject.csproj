@@ -83,6 +83,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\LoadTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +109,7 @@
     <Compile Include="Models\Tests.cs" />
     <Compile Include="Models\TextItem.cs" />
     <Compile Include="Services\BinaryFormatterService.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="Services\IWindowService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
@@ -113,6 +118,9 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Windows\CreateTestWindow.xaml.cs">
       <DependentUpon>CreateTestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LoadTestWindow.xaml.cs">
       <DependentUpon>LoadTestWindow.xaml</DependentUpon>
