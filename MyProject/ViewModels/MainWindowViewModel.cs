@@ -2,10 +2,9 @@
 using MyProject.Models;
 using MyProject.Services;
 using MyProject.ViewModels.Base;
-using MyProject.Views.Windows;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows;
+
 
 namespace MyProject.ViewModels
 {
@@ -34,7 +33,7 @@ namespace MyProject.ViewModels
                 return createTest ??
                   (createTest = new LambdaCommand(obj =>
                   {
-                      OpenWindow(new CreateTestWindow(new Test(), false));
+                      windowService.ShowWindow("CreateTestWindow", new Create_LoadWindowViewModel(new BinaryFormatterService(),new Test(), false));
                   }));
             }
         }
@@ -60,7 +59,7 @@ namespace MyProject.ViewModels
                 return edit ??
                   (edit = new LambdaCommand(obj =>
                   {
-                      OpenWindow(new CreateTestWindow(SelectedTest, true));
+                      windowService.ShowWindow("CreateTestWindow", new Create_LoadWindowViewModel(new BinaryFormatterService(), SelectedTest, true));
                   }));
             }
         }
@@ -73,25 +72,10 @@ namespace MyProject.ViewModels
                 return play ??
                   (play = new LambdaCommand(obj =>
                   {
-                      OpenWindow(new LoadTestWindow(SelectedTest));
+                      windowService.ShowWindow("LoadTestWindow", new LoadTestViewModel(SelectedTest));
                   }));
             }
         }
-
-        #region METHODS
-        private void OpenWindow<T>(T window)
-            where T : Window
-        {
-            SetCenterPositionAndOpen(window);
-        }
-
-        private void SetCenterPositionAndOpen(Window window)
-        {
-            window.Owner = Application.Current.MainWindow;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.ShowDialog();
-        }
-        #endregion
 
         public MainWindowViewModel(IFileService fileService)
         {

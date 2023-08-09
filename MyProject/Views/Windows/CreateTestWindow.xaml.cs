@@ -7,10 +7,9 @@ namespace MyProject.Views.Windows
 {
     public partial class CreateTestWindow : Window 
     {
-        public CreateTestWindow(Test test, bool editTest)
+        public CreateTestWindow()
         {
             InitializeComponent();
-            DataContext = new Create_LoadWindowViewModel(new BinaryFormatterService(), test, editTest);
         }
     }
 }

@@ -7,10 +7,9 @@ namespace MyProject.Views.Windows
 {
     public partial class LoadTestWindow : Window
     {
-        public LoadTestWindow(Test test)
+        public LoadTestWindow()
         {
             InitializeComponent();
-            DataContext = new LoadTestViewModel(test);
         }
     }
 }
