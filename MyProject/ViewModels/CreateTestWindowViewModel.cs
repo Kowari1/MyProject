@@ -11,10 +11,10 @@ namespace MyProject.ViewModels
     public class Create_LoadWindowViewModel : ViewModel
     {
         bool editTest;
-
         Test test;
 
         IFileService fileService;
+        IDialogService dialogService = new DialogService();
 
         public ObservableCollection<Question> Questions { get; set; }
         = new ObservableCollection<Question>();
@@ -168,6 +168,7 @@ namespace MyProject.ViewModels
                               if (test.Name == TestName && test != this.test || TestName == null)
                               {
                                   MessageBox.Show("тест с таким именем уже существует");
+                                  
                                   break;
                               }
                               else
